@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 50% 96%;
+    --foreground: 210 40% 14%;
+
+    --card: 210 60% 98%;
+    --card-foreground: 210 40% 14%;
+
+    --popover: 210 60% 98%;
+    --popover-foreground: 210 40% 14%;
+
+    --primary: 205 85% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 205 45% 90%;
+    --secondary-foreground: 210 40% 20%;
+
+    --muted: 210 30% 92%;
+    --muted-foreground: 210 15% 46%;
+
+    --accent: 195 80% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 90% 10%;
+
+    --success: 160 65% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 210 30% 86%;
+    --input: 210 30% 86%;
+    --ring: 205 85% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 210 55% 20%;
+    --sidebar-foreground: 210 20% 80%;
+    --sidebar-primary: 200 90% 60%;
+    --sidebar-primary-foreground: 210 55% 12%;
+    --sidebar-accent: 210 45% 26%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 210 40% 25%;
+    --sidebar-ring: 200 90% 60%;
+
+    /* Glass effect tokens */
+    --glass-bg: 210 60% 98% / 0.7;
+    --glass-border: 210 30% 86% / 0.5;
+    --glass-shadow: 205 85% 45% / 0.1;
+
+    /* Glow tokens */
+    --glow-primary: 205 85% 45%;
+    --glow-success: 160 65% 40%;
+    --glow-warning: 38 92% 50%;
+    --glow-destructive: 0 72% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-card/70 backdrop-blur-xl border border-border/50 shadow-lg;
+  }
+
+  .glass-panel-strong {
+    @apply bg-card/85 backdrop-blur-2xl border border-border/60 shadow-xl;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.2),
+                0 0 60px hsl(var(--glow-primary) / 0.08);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px hsl(var(--glow-success) / 0.2),
+                0 0 60px hsl(var(--glow-success) / 0.08);
+  }
+
+  .glow-warning {
+    box-shadow: 0 0 20px hsl(var(--glow-warning) / 0.2),
+                0 0 60px hsl(var(--glow-warning) / 0.08);
+  }
+
+  .glow-destructive {
+    box-shadow: 0 0 20px hsl(var(--glow-destructive) / 0.2),
+                0 0 60px hsl(var(--glow-destructive) / 0.08);
+  }
+
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .water-bg {
+    background: linear-gradient(180deg, hsl(205 85% 92%), hsl(200 70% 88%), hsl(195 60% 94%));
+  }
+
+  .water-bg-deep {
+    background: linear-gradient(135deg, hsl(210 55% 20%), hsl(205 60% 28%), hsl(200 50% 22%));
+  }
+}
+
+@layer utilities {
+  .animate-water {
+    animation: water-wave 3s ease-in-out infinite;
+  }
+
+  @keyframes water-wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes alert-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .animate-alert-flash {
+    animation: alert-flash 1s ease-in-out infinite;
+  }
+
+  @keyframes ripple {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .animate-ripple {
+    animation: ripple 2s ease-out infinite;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
